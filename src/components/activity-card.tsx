@@ -43,6 +43,7 @@ export function ActivityCard({ row, hours }: Props) {
               <span className="text-xs text-neutral-500">{hour.hourLabel}</span>
               <span className="text-base">{cell.score}</span>
               <span className="text-xs text-neutral-500">{Math.round(hour.feelsLikeF)}°</span>
+              {cell.isBest && <span className="sr-only">best hour</span>}
             </li>
           );
         })}
