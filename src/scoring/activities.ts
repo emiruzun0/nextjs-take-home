@@ -7,19 +7,21 @@ export type ActivityRules = {
   maxFeelsLikeF: number;
   maxWindMph: number;
   rainTolerance: RainTolerance;
-  needsDaylight: boolean;
+  // Points lost after sunset. Picnics and cycling really need daylight; the rest
+  // are often done under lights, but are still harder to see and easier to trip.
+  darkPenalty: number;
 };
 
 export type ActivityId = "running" | "cycling" | "walking" | "picnic" | "basketball" | "soccer";
 
 // The rules from DECISIONS.md (decision 8). Change them there first.
 export const ACTIVITIES: Record<ActivityId, ActivityRules> = {
-  running: { minFeelsLikeF: 40, maxFeelsLikeF: 70, maxWindMph: 15, rainTolerance: "light", needsDaylight: false },
-  cycling: { minFeelsLikeF: 55, maxFeelsLikeF: 75, maxWindMph: 10, rainTolerance: "none", needsDaylight: true },
-  walking: { minFeelsLikeF: 40, maxFeelsLikeF: 80, maxWindMph: 20, rainTolerance: "light", needsDaylight: false },
-  picnic: { minFeelsLikeF: 60, maxFeelsLikeF: 85, maxWindMph: 10, rainTolerance: "none", needsDaylight: true },
-  basketball: { minFeelsLikeF: 55, maxFeelsLikeF: 80, maxWindMph: 15, rainTolerance: "none", needsDaylight: false },
-  soccer: { minFeelsLikeF: 45, maxFeelsLikeF: 75, maxWindMph: 20, rainTolerance: "moderate", needsDaylight: false },
+  running: { minFeelsLikeF: 40, maxFeelsLikeF: 70, maxWindMph: 15, rainTolerance: "light", darkPenalty: 15 },
+  cycling: { minFeelsLikeF: 55, maxFeelsLikeF: 75, maxWindMph: 10, rainTolerance: "none", darkPenalty: 50 },
+  walking: { minFeelsLikeF: 40, maxFeelsLikeF: 80, maxWindMph: 20, rainTolerance: "light", darkPenalty: 10 },
+  picnic: { minFeelsLikeF: 60, maxFeelsLikeF: 85, maxWindMph: 10, rainTolerance: "none", darkPenalty: 50 },
+  basketball: { minFeelsLikeF: 55, maxFeelsLikeF: 80, maxWindMph: 15, rainTolerance: "none", darkPenalty: 10 },
+  soccer: { minFeelsLikeF: 45, maxFeelsLikeF: 75, maxWindMph: 20, rainTolerance: "moderate", darkPenalty: 20 },
 };
 
 export const ACTIVITY_IDS = Object.keys(ACTIVITIES) as ActivityId[];

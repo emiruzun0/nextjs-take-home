@@ -104,14 +104,14 @@ Components are kept separate from page-level code: a component only knows how to
 
 **Temperature:** The rules use the "feels like" temperature, because it includes wind and humidity and is closer to what people actually feel. The UI shows the feels-like temperature next to each score, so people can make their own judgment instead of just trusting the number.
 
-| Activity | Ideal feels-like temp | Wind under | Rain | At night |
+| Activity | Ideal feels-like temp | Wind under | Rain | After dark |
 |---|---|---|---|---|
-| Running | 40–70°F | 15 mph | Light rain OK | OK |
-| Cycling | 55–75°F | 10 mph | None | Low score |
-| Walking | 40–80°F | 20 mph | Light rain OK | OK |
-| Picnic | 60–85°F | 10 mph | None at all | Low score |
-| Basketball | 55–80°F | 15 mph | None (a wet court is slippery) | OK |
-| Soccer | 45–75°F | 20 mph | Light to moderate rain OK | OK |
+| Running | 40–70°F | 15 mph | Light rain OK | −15 |
+| Cycling | 55–75°F | 10 mph | None | −50 |
+| Walking | 40–80°F | 20 mph | Light rain OK | −10 |
+| Picnic | 60–85°F | 10 mph | None at all | −50 |
+| Basketball | 55–80°F | 15 mph | None (a wet court is slippery) | −10 |
+| Soccer | 45–75°F | 20 mph | Light to moderate rain OK | −20 |
 
 **Thunderstorms** set every activity to 0, for safety.
 
@@ -120,20 +120,25 @@ Components are kept separate from page-level code: a component only knows how to
 | Factor | Points lost |
 |---|---|
 | Too cold or too hot | 3 per °F outside the range |
-| Too windy | 4 per mph over the limit |
+| Too windy | 4 per mph for the first 5 mph over, 6 per mph for the next 5, then 8 per mph (5 over → −20, 10 over → −50) |
 | Rain, by what the activity tolerates | none: light −50, moderate −80, heavy −100 · light: moderate −40, heavy −80 · moderate: heavy −50 |
-| Chance of rain (only for activities that can't take any rain) | half the percentage, rounded down, e.g. 60% → −30 |
-| Dark (picnic and cycling) | −50 |
+| Chance of rain (only for activities that can't take any rain, and only when it isn't already raining) | half the percentage, rounded down, e.g. 60% → −30 |
+| Dark | per activity, see the table above |
+| Late night (11 PM to 6 AM) | −20 for every activity |
 
 Rain levels use the US National Weather Service thresholds: light is under 0.1 in/h, moderate is 0.1–0.3 in/h, heavy is over 0.3 in/h.
 
-**Why these weights:** A 10°F miss (−30) should hurt about as much as being 7–8 mph too windy, since both make the activity noticeably worse but still possible. Rain penalties are bigger because rain can stop an activity outright. The chance of rain only counts for picnics, cycling and basketball, because those are the activities you'd plan around it; soccer goes on either way.
+**A 100 means perfect, so it should be rare.** Every factor that makes an hour less than ideal costs something, even if the activity is still possible.
+
+**Why these weights:** A 10°F miss (−30) costs about as much as being 6 mph too windy. Wind gets more expensive the further over the limit it goes: a little breeze over the limit is mildly annoying, but far over it makes the activity miserable, so a flat rate would be too soft at the top and too harsh at the bottom. Rain penalties are bigger because rain can stop an activity outright. The chance of rain only counts for picnics, cycling and basketball, because those are the activities you'd plan around it; soccer goes on either way. It also doesn't count when it's already raining, because then the rain penalty already covers it; counting both made light rain cost a picnic 80 points.
 
 Like the backend's error codes, the reason for a score is a code (`TOO_WINDY`, `RAIN`, `DARK`…), and the frontend picks the words.
 
 **Why these numbers:** They're rounded on purpose. People think in round numbers like "40 to 70 degrees", and rounded values read like rules a person chose rather than numbers a formula produced.
 
-**Why night only hurts picnics and cycling:** Running, walking, basketball and soccer are commonly done under street or court lights. A picnic needs daylight, and cycling in the dark is a safety risk.
+**Why darkness costs every activity something:** Even with street or court lights, it's harder to see and easier to trip, so a night run can't be "perfect". How much it costs depends on the activity: picnics need daylight and cycling in the dark is a safety risk (−50); a big soccer field is hard to light well (−20); running on uneven ground is a tripping risk (−15); courts and walking paths are usually lit (−10).
+
+**Why sleep hours cost extra:** Late at night is less enjoyable for any activity, lit or not, because it's when people sleep. Without this, the best hour for running could be 1 AM.
 
 ## 9. Layout and URL state
 
