@@ -51,8 +51,9 @@ export function scoreHour(rules: ActivityRules, hour: HourlyWeather): HourScore 
     ["TOO_WINDY", Math.max(0, windyBy) * POINTS_PER_MPH],
     ["RAIN", RAIN_PENALTY[rules.rainTolerance][rainLevel(hour.precipitationIn)]],
     // Activities that can't take any rain also lose points when rain is likely,
-    // since you'd have to plan around it: 60% chance costs 30 points.
-    ["RAIN_LIKELY", rules.rainTolerance === "none" ? hour.precipitationChance / 2 : 0],
+    // since you'd have to plan around it: 60% chance costs 30 points. Rounded
+    // down so a 1% chance doesn't become the "reason" for a perfect score.
+    ["RAIN_LIKELY", rules.rainTolerance === "none" ? Math.floor(hour.precipitationChance / 2) : 0],
     ["DARK", rules.needsDaylight && !hour.isDay ? DARK_PENALTY : 0],
   ];
 

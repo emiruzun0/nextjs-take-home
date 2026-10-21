@@ -122,7 +122,7 @@ Components are kept separate from page-level code: a component only knows how to
 | Too cold or too hot | 3 per °F outside the range |
 | Too windy | 4 per mph over the limit |
 | Rain, by what the activity tolerates | none: light −50, moderate −80, heavy −100 · light: moderate −40, heavy −80 · moderate: heavy −50 |
-| Chance of rain (only for activities that can't take any rain) | half the percentage, e.g. 60% → −30 |
+| Chance of rain (only for activities that can't take any rain) | half the percentage, rounded down, e.g. 60% → −30 |
 | Dark (picnic and cycling) | −50 |
 
 Rain levels use the US National Weather Service thresholds: light is under 0.1 in/h, moderate is 0.1–0.3 in/h, heavy is over 0.3 in/h.
@@ -134,3 +134,11 @@ Like the backend's error codes, the reason for a score is a code (`TOO_WINDY`, `
 **Why these numbers:** They're rounded on purpose. People think in round numbers like "40 to 70 degrees", and rounded values read like rules a person chose rather than numbers a formula produced.
 
 **Why night only hurts picnics and cycling:** Running, walking, basketball and soccer are commonly done under street or court lights. A picnic needs daylight, and cycling in the dark is a safety risk.
+
+## 9. Layout and URL state
+
+**Choice:** Two layouts, with a switch between them: **activity cards** (the default) and **one big table**.
+
+**Why:** They answer different questions. Cards answer "when is the best time for soccer?": each card starts with the best hour, which works well on a phone. The table answers "what can I do at 6 PM?": you compare activities in the same column.
+
+**URL state:** The city, the selected activities and the layout all live in the URL, e.g. `/?city=Austin&activities=running,soccer&view=table`. A shared link opens exactly the same view, and the browser's back button works. The activity and layout switches are plain links to the next URL, and the search box is a plain form, so the page works without JavaScript. The only client-side code is the "Try again" button and the error page.
