@@ -199,3 +199,21 @@ The review also made me notice that 100 came up too often. I added darkness for 
 - **Vercel, deployed from the CI workflow** after the tests pass. The safest option, but it needs a Vercel account and three repo secrets (a token, the account ID and the project ID).
 - **Vercel's GitHub integration.** Less setup, but it deploys even when tests fail.
 - **GitHub Pages.** No new account, but it only hosts static files, and this app renders and caches on the server (decision 4). Making it static would mean fetching in the browser, which undoes that decision.
+
+## 14. Search suggestions while typing
+
+**Choice:** The search box suggests up to 5 places as you type. Picking one opens that exact place.
+
+**Why:** Typing a name and getting the top match isn't enough: "Paris" always meant Paris, France, so Paris, Texas couldn't be found at all. Suggestions fix that and make searching faster.
+
+**How it works:**
+- A small API route, `/api/cities?q=par`, returns up to 5 matches as `{ ok, data | error }` with the matching HTTP status (502 if Open-Meteo fails). It's the only API route; the forecast still comes from Server Components (decision 4).
+- The search box waits 250 ms after the user stops typing before asking, and cancels a request if the user keeps typing, so an older, slower answer can never replace a newer one. Fewer than 2 characters sends nothing.
+- A picked place goes in the URL by its Open-Meteo ID: `/?city=Paris&place=4717560`. The name stays in the URL for readability and for the search box.
+- It works with the keyboard (arrows, Enter, Escape) and screen readers (the ARIA combobox pattern).
+
+**What stays the same:** It's still a plain GET form underneath. Without JavaScript, or when Enter is pressed without picking a suggestion, it searches by name like before, so old links like `/?city=Austin` still work. If the suggestions fail, the box just doesn't show any; searching still works.
+
+**Trade-off:** This adds the page's first real client component, which changes what decision 9 said about client-side code: there's now the search box as well as the "Try again" button and the error page. I think it's worth it because the page still works without it.
+
+**Bug the browser test caught:** If Search was pressed before the suggestions arrived, they popped open afterwards and covered the page. Searching or picking now cancels any request still waiting.

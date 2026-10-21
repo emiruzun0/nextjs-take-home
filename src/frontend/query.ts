@@ -5,6 +5,8 @@ export type View = "cards" | "table";
 // Everything the page shows is described by the URL, so any view can be shared.
 export type Query = {
   city: string;
+  // Set when the city was picked from the suggestions, so "Paris" means the right Paris.
+  placeId: number | null;
   activities: ActivityId[];
   view: View;
 };
@@ -14,6 +16,8 @@ type SearchParams = Record<string, string | string[] | undefined>;
 export function parseQuery(params: SearchParams): Query {
   const city = first(params.city)?.trim() ?? "";
   const view = first(params.view) === "table" ? "table" : "cards";
+  const place = Number(first(params.place));
+  const placeId = Number.isInteger(place) && place > 0 ? place : null;
 
   // No `activities` param means "show all". An empty one means the user turned all of them off.
   const raw = first(params.activities);
@@ -22,12 +26,13 @@ export function parseQuery(params: SearchParams): Query {
       ? ACTIVITY_IDS
       : ACTIVITY_IDS.filter((id) => raw.split(",").includes(id));
 
-  return { city, activities, view };
+  return { city, placeId, activities, view };
 }
 
 export function toHref(query: Query): string {
   const params = new URLSearchParams();
   if (query.city) params.set("city", query.city);
+  if (query.placeId !== null) params.set("place", String(query.placeId));
   if (query.activities.length !== ACTIVITY_IDS.length) {
     params.set("activities", query.activities.join(","));
   }
