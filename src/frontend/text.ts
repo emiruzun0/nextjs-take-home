@@ -20,6 +20,7 @@ export const REASON_LABELS: Record<Reason, string> = {
   RAIN: "Rain",
   RAIN_LIKELY: "Rain likely",
   DARK: "Dark out",
+  LATE_NIGHT: "Late at night",
 };
 
 export function reasonLabel(reason: Reason | null): string {
