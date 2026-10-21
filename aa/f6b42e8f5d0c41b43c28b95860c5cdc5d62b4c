@@ -1,0 +1,27 @@
+DECISIONS.md
+  s_997d97453d2b58::t_5ebb99ff7f5ca0 107,109-114,123,125-127,131-133,139-141
+src/frontend/text.ts
+  s_997d97453d2b58::t_e81265a3bb853c 23
+src/scoring/activities.ts
+  s_997d97453d2b58::t_d185d5bf204793 10-12,19-24
+src/scoring/score.test.ts
+  s_997d97453d2b58::t_2d36b23a34f386 4,52-53,55-56,59-79,88-92,110-119
+src/scoring/score.ts
+  s_997d97453d2b58::t_9e927e67eaea62 5-13,22,24-26,40-48,65,70-71,73-74,76-81,94-99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "aaf6b42e8f5d0c41b43c28b95860c5cdc5d62b4c",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
