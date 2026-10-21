@@ -68,6 +68,10 @@ describe("scoreHour", () => {
     expect(scoreHour(ACTIVITIES.soccer, likelyRain).score).toBe(100);
   });
 
+  it("ignores a tiny chance of rain", () => {
+    expect(scoreHour(ACTIVITIES.picnic, hour({ precipitationChance: 1 }))).toMatchObject({ score: 100, reason: null });
+  });
+
   it("adds penalties together and reports the biggest one", () => {
     // Cycling: 5 mph over (-20) and 10°F too cold (-30).
     expect(scoreHour(ACTIVITIES.cycling, hour({ windMph: 15, feelsLikeF: 45 }))).toMatchObject({
