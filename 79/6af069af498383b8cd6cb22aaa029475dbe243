@@ -1,0 +1,35 @@
+.gitignore
+  s_997d97453d2b58::t_a1b978c10bf12b 1-41
+eslint.config.mjs
+  s_997d97453d2b58::t_912e173430ad75 1-18
+next.config.ts
+  s_997d97453d2b58::t_fe1ee327ccbe21 1-18
+package-lock.json
+  s_997d97453d2b58::t_20d868dd8986b3 1-6751
+package.json
+  s_997d97453d2b58::t_cbdd1c56b1e1e2 1-27
+src/app/globals.css
+  s_997d97453d2b58::t_51030166d9d99e 1
+src/app/layout.tsx
+  s_997d97453d2b58::t_b562acd3f3f5fd 1-17
+src/app/page.tsx
+  s_997d97453d2b58::t_e6989009e93552 1-7
+tsconfig.json
+  s_997d97453d2b58::t_fca8782cdf39da 1-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "796af069af498383b8cd6cb22aaa029475dbe243",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
