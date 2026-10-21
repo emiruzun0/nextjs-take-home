@@ -1,0 +1,43 @@
+DECISIONS.md
+  s_997d97453d2b58::t_a3761f593b1c7e 202-219
+README.md
+  s_997d97453d2b58::t_aea373ce51f121 5,64-65,76-77
+e2e/forecast.spec.ts
+  s_997d97453d2b58::t_54f2666f772d99 24-32
+src/app/api/cities/route.ts
+  s_997d97453d2b58::t_aa8f8667a72289 1-15
+src/frontend/city-search.test.tsx
+  s_997d97453d2b58::t_8a72ad4f9b1082 1-92
+src/frontend/city-search.tsx
+  s_997d97453d2b58::t_e7d9d017035b3f 1-2,4-51,53-91,94,101-108,111-116,119-121,126-148,152-156
+src/frontend/forecast-page.tsx
+  s_997d97453d2b58::t_b2977521a3d30c 9,11,26,38,63
+src/frontend/query.test.ts
+  s_997d97453d2b58::t_362563be64b01f 7,18-23,31-32,36,41-46,48,56
+src/frontend/query.ts
+  s_997d97453d2b58::t_677aa6095427c8 8-9,19-20,29,35
+src/frontend/text.ts
+  s_997d97453d2b58::t_077768f87c736a 3,31-37
+src/server/geocoding.ts
+  s_997d97453d2b58::t_4d6dd69520c0f7 7-16,18,21-24,28,30,33-56,58,60-65
+src/server/get-city-forecast.ts
+  s_997d97453d2b58::t_304814eb5452ca 5,7-10,15,22,36-46
+src/shared/weather.ts
+  s_997d97453d2b58::t_e5eaf0a2651de2 2-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a5d49f79d455a7acda5423c5cae4b32e8aa3ca0a",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
