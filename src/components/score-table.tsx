@@ -45,6 +45,7 @@ export function ScoreTable({ rows, hours }: Props) {
                   className={`p-2 text-center ${cell.isBest ? "font-semibold underline" : ""}`}
                 >
                   {cell.score}
+                  {cell.isBest && <span className="sr-only"> best hour</span>}
                 </td>
               ))}
             </tr>
