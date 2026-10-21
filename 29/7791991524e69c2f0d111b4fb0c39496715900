@@ -1,0 +1,25 @@
+.github/workflows/ci.yml
+  s_997d97453d2b58::t_0cac45b8134db2 1-49
+DECISIONS.md
+  s_997d97453d2b58::t_ff33c90b3d9b36 180-190
+README.md
+  s_997d97453d2b58::t_15b323927de96a 3-4,33-41
+playwright.config.ts
+  s_997d97453d2b58::t_352b91603694fc 11-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "297791991524e69c2f0d111b4fb0c39496715900",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
