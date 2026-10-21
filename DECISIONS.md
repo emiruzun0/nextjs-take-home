@@ -147,3 +147,33 @@ Like the backend's error codes, the reason for a score is a code (`TOO_WINDY`, `
 **Why:** They answer different questions. Cards answer "when is the best time for soccer?": each card starts with the best hour, which works well on a phone. The table answers "what can I do at 6 PM?": you compare activities in the same column.
 
 **URL state:** The city, the selected activities and the layout all live in the URL, e.g. `/?city=Austin&activities=running,soccer&view=table`. A shared link opens exactly the same view, and the browser's back button works. The activity and layout switches are plain links to the next URL, and the search box is a plain form, so the page works without JavaScript. The only client-side code is the "Try again" button and the error page.
+
+## 10. Getting a second opinion on the scoring
+
+I asked ChatGPT to review the scoring code and rules, then decided point by point what to take.
+
+| Suggestion | What I did | Why |
+|---|---|---|
+| Don't count rain twice (rain plus chance of rain) | **Taken** | Light rain cost a picnic 80 points; if it's already raining, the chance is already part of that. |
+| Tests for exact boundary values | **Taken** | Cheap, and they protect the rules when the weights change. |
+| Score labels (Excellent, Good, Fair…) | **Left out** | Same reason as no colors (decision 2): 69 and 71 would get different labels. |
+| Separate penalty rates per activity for heat, cold and wind | **Left out** | Four more settings per activity with no data to tune them. On the "more time" list. |
+| More than one reason per hour | **Left out** | UI work for a small gain. On the "more time" list. |
+| A separate "safe" flag, wind gusts, heat index | **Left out for now** | Thunderstorms already score 0 with their own reason, so the UI can tell unsafe from uncomfortable. Gusts and heat index are on the "more time" list. |
+| Lower wind penalty (2–3 per mph) | **Changed differently** | I kept 4 per mph for being a little over the limit, but made it grow further over (decision 8). |
+
+The review also made me notice that 100 came up too often. I added darkness for every activity and the sleep-hours penalty (decision 8), which weren't in its suggestions.
+
+## 11. How I worked
+
+**Write decisions down as they're made.** Every choice went into this file before or together with the code, with the options I considered. The README summarizes; this file has the reasons.
+
+**One branch and one pull request per concern.** Docs, scaffold, backend, scoring, frontend, tests, tooling and fixes each got their own PR. Each change is small enough to review on its own, and if something breaks, it's clear which PR caused it and easy to fix or revert just that part.
+
+**PR conventions from my previous work.** PR titles follow `type(scope): summary`, e.g. `feat(backend): …` or `fix(scoring): …`. Every PR description uses the same template: **Why?**, **This PR will...**, **Testing** and **Notes**. I kept the template out of the repo on purpose; it's how I write PRs, not something this project needs to enforce.
+
+**Tests beyond the scoring rules.** Unit tests on the scoring rules alone wouldn't show whether users see the right thing, so I added component tests for the display and a Playwright test (Chromium only) for the whole flow in a real browser.
+
+**Lint before every commit.** A pre-commit hook (`simple-git-hooks`) runs `npm run lint`, so lint errors never reach a PR. It installs itself on `npm install`. Typecheck and tests aren't in the hook, to keep commits fast.
+
+**AI as a pair, not the decision-maker.** Claude Code proposed options and wrote most of the code. I also used ChatGPT, Gemini, Perplexity and GitHub Copilot for ideas, a second opinion and test fixtures. In every case I chose between the options, reviewed every change and committed it myself.
