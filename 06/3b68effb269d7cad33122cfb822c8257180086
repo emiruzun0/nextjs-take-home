@@ -1,0 +1,21 @@
+DECISIONS.md
+  s_997d97453d2b58::t_7cc3d0372fbc6a 150-179
+README.md
+  s_997d97453d2b58::t_04044b3d26a6b1 86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "063b68effb269d7cad33122cfb822c8257180086",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
