@@ -1,5 +1,7 @@
 # Activity Weather
 
+[![CI](https://github.com/emiruzun0/nextjs-take-home/actions/workflows/ci.yml/badge.svg)](https://github.com/emiruzun0/nextjs-take-home/actions/workflows/ci.yml)
+
 Search a city and see, hour by hour for the rest of today and tomorrow, how good the weather is for running, cycling, walking, a picnic, basketball and soccer. Each hour gets a score from 0 to 100 (100 is perfect) and a short reason, and each activity shows its best hour.
 
 The same weather is good for one activity and bad for another: light rain ruins a picnic and makes a basketball court slippery, but a soccer game goes on. Comparing activities side by side is the point of the app.
@@ -27,6 +29,15 @@ Then open <http://localhost:3000/?city=Austin>.
 | `npm run typecheck` | Generates Next.js route types, then runs `tsc` |
 | `npm test` | Unit and component tests (Vitest, React Testing Library) |
 | `npm run test:e2e` | Browser test against the production build (Playwright, Chromium). Run `npx playwright install chromium` once first. |
+
+## Continuous integration
+
+Every pull request and every push to `main` runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml) on GitHub Actions, in two parallel jobs:
+
+- **Lint, typecheck and unit tests:** `npm run lint`, `npm run typecheck`, `npm test`
+- **Playwright (Chromium):** builds the app and runs the browser test. If it fails, the HTML report is attached to the run for 7 days.
+
+A pre-commit hook also runs lint locally before every commit (installed automatically by `npm install`).
 
 ## How it works
 

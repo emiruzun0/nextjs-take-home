@@ -8,6 +8,8 @@ export default defineConfig({
   // so allow a slow response and one retry for a network blip.
   timeout: 30_000,
   retries: 1,
+  // In CI, also write an HTML report that the workflow uploads when a test fails.
+  reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
   use: { baseURL: `http://localhost:${PORT}` },
   // Chromium only: one browser is enough to prove the flow works.
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
