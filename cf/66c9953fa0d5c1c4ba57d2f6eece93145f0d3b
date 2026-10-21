@@ -1,0 +1,33 @@
+package-lock.json
+  s_997d97453d2b58::t_dfd07ab9a60994 13-15,5807-5812
+package.json
+  s_997d97453d2b58::t_a885a37733de38 15-17
+src/server/fetch-json.ts
+  s_997d97453d2b58::t_835976f2b05ea9 1-15
+src/server/forecast.ts
+  s_997d97453d2b58::t_faf9095feb3fb3 1-68
+src/server/geocoding.ts
+  s_997d97453d2b58::t_0438eaff845040 1-43
+src/server/get-city-forecast.ts
+  s_997d97453d2b58::t_3f07ee1f93ee78 1-44
+src/shared/result.ts
+  s_997d97453d2b58::t_7ca709cd8132e6 1-7
+src/shared/weather.ts
+  s_997d97453d2b58::t_1755744972190f 1-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cf66c9953fa0d5c1c4ba57d2f6eece93145f0d3b",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
