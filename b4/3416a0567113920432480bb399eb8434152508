@@ -1,0 +1,21 @@
+package-lock.json
+  s_997d97453d2b58::t_516cd97fba66e6 28,7084-7094
+package.json
+  s_997d97453d2b58::t_5b01d7aafe5a45 12-13,33,37-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b43416a0567113920432480bb399eb8434152508",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
