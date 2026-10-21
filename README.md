@@ -83,4 +83,4 @@ Every decision, the options I considered and why I chose what I did is in [DECIS
 
 ## AI usage
 
-I built this with Claude Code. I made the product and architecture decisions and recorded them in DECISIONS.md as I went; the AI proposed options, wrote most of the code, and I reviewed every change before committing. I also asked ChatGPT to review the scoring rules: I took its suggestion to stop counting rain twice and its idea for boundary tests, and left out the rest (score labels, per-activity penalty rates, multiple reasons) for the reasons in DECISIONS.md.
+I built this with Claude Code. I made the product and architecture decisions and recorded them in DECISIONS.md as I went; the AI proposed options, wrote most of the code, and I reviewed every change before committing. I also used Gemini, Perplexity and GitHub Copilot for ideas and test fixtures, and asked ChatGPT to review the scoring rules: I took its suggestion to stop counting rain twice and its idea for boundary tests, and left out the rest (score labels, per-activity penalty rates, multiple reasons) for the reasons in DECISIONS.md.
