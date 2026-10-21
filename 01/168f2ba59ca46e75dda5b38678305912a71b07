@@ -1,0 +1,51 @@
+DECISIONS.md
+  s_997d97453d2b58::t_fd0a6287b102ba 125,137-144
+src/app/error.tsx
+  s_997d97453d2b58::t_71651b5acf92d3 1-17
+src/app/loading.tsx
+  s_997d97453d2b58::t_ed290b68f125ff 1-15
+src/app/page.tsx
+  s_997d97453d2b58::t_b1097332a1d5ae 1-5
+src/components/activity-card.tsx
+  s_997d97453d2b58::t_125461ffe4cdd2 1-52
+src/components/retry-button.tsx
+  s_997d97453d2b58::t_67c0bc04ec9158 1-22
+src/components/score-table.tsx
+  s_997d97453d2b58::t_2e6245913398f5 1-56
+src/components/score-types.ts
+  s_997d97453d2b58::t_94d1604fef7273 1-24
+src/components/search-form.tsx
+  s_997d97453d2b58::t_0e4a36eb4cef3c 1-33
+src/components/status-message.tsx
+  s_997d97453d2b58::t_29fd66c4f99da6 1-16
+src/components/toggle-links.tsx
+  s_997d97453d2b58::t_86c7a2a965e8d0 1-34
+src/frontend/build-rows.ts
+  s_997d97453d2b58::t_5a9cf24f2dedae 1-42
+src/frontend/forecast-page.tsx
+  s_997d97453d2b58::t_7c70660a3edad3 1-103
+src/frontend/query.ts
+  s_997d97453d2b58::t_c572b314629662 1-49
+src/frontend/text.ts
+  s_997d97453d2b58::t_6125050a00fee2 1-39
+src/scoring/score.test.ts
+  s_997d97453d2b58::t_f1e9ec7da80991 71-74
+src/scoring/score.ts
+  s_997d97453d2b58::t_d9f68657c42438 54-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "01168f2ba59ca46e75dda5b38678305912a71b07",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
