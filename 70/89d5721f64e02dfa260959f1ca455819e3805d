@@ -1,0 +1,31 @@
+DECISIONS.md
+  s_997d97453d2b58::t_54bde690af1583 118-133
+package-lock.json
+  s_997d97453d2b58::t_a53e33e1880448 19,25-26,1323-1611,1909-1926,1949-1951,2597-2644,2878-2887,3098-3107,3511-3517,4001-4010,4021-4030,4172-4191,5785-5798,6145-6179,6508-6514,6736-6755,7095-7596,7702-7714
+package.json
+  s_997d97453d2b58::t_d7f1029059c438 10-11,22,28-29
+src/scoring/activities.ts
+  s_997d97453d2b58::t_7f80bbad5ec4b1 1-25
+src/scoring/score.test.ts
+  s_997d97453d2b58::t_52bfdff46cf4e3 1-107
+src/scoring/score.ts
+  s_997d97453d2b58::t_4f473333405840 1-75
+vitest.config.mts
+  s_997d97453d2b58::t_d1a477636ecd6a 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7089d5721f64e02dfa260959f1ca455819e3805d",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
