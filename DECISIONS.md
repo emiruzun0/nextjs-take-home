@@ -115,6 +115,22 @@ Components are kept separate from page-level code: a component only knows how to
 
 **Thunderstorms** set every activity to 0, for safety.
 
+**How many points each factor costs:**
+
+| Factor | Points lost |
+|---|---|
+| Too cold or too hot | 3 per °F outside the range |
+| Too windy | 4 per mph over the limit |
+| Rain, by what the activity tolerates | none: light −50, moderate −80, heavy −100 · light: moderate −40, heavy −80 · moderate: heavy −50 |
+| Chance of rain (only for activities that can't take any rain) | half the percentage, e.g. 60% → −30 |
+| Dark (picnic and cycling) | −50 |
+
+Rain levels use the US National Weather Service thresholds: light is under 0.1 in/h, moderate is 0.1–0.3 in/h, heavy is over 0.3 in/h.
+
+**Why these weights:** A 10°F miss (−30) should hurt about as much as being 7–8 mph too windy, since both make the activity noticeably worse but still possible. Rain penalties are bigger because rain can stop an activity outright. The chance of rain only counts for picnics, cycling and basketball, because those are the activities you'd plan around it; soccer goes on either way.
+
+Like the backend's error codes, the reason for a score is a code (`TOO_WINDY`, `RAIN`, `DARK`…), and the frontend picks the words.
+
 **Why these numbers:** They're rounded on purpose. People think in round numbers like "40 to 70 degrees", and rounded values read like rules a person chose rather than numbers a formula produced.
 
 **Why night only hurts picnics and cycling:** Running, walking, basketball and soccer are commonly done under street or court lights. A picnic needs daylight, and cycling in the dark is a safety risk.
