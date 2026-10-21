@@ -188,3 +188,14 @@ The review also made me notice that 100 came up too often. I added darkness for 
 - A new push to the same PR cancels the run that's still going, so only the latest code is tested.
 - The workflow can only read the repo (`permissions: contents: read`); it doesn't need more.
 - When the Playwright test fails, its HTML report is uploaded to the run for 7 days, so the failure can be inspected without re-running it locally.
+
+## 13. Deployment: left out
+
+**Choice:** No deployment for now. The README explains how to run the app locally, and CI proves on every push that it builds and passes its tests.
+
+**Why:** Deployment was a nice-to-have from the start (decision 2), and every host that can run this app needs an account. I didn't want to create one just for a nice-to-have.
+
+**Considered:**
+- **Vercel, deployed from the CI workflow** after the tests pass. The safest option, but it needs a Vercel account and three repo secrets (a token, the account ID and the project ID).
+- **Vercel's GitHub integration.** Less setup, but it deploys even when tests fail.
+- **GitHub Pages.** No new account, but it only hosts static files, and this app renders and caches on the server (decision 4). Making it static would mean fetching in the browser, which undoes that decision.
