@@ -177,3 +177,14 @@ The review also made me notice that 100 came up too often. I added darkness for 
 **Lint before every commit.** A pre-commit hook (`simple-git-hooks`) runs `npm run lint`, so lint errors never reach a PR. It installs itself on `npm install`. Typecheck and tests aren't in the hook, to keep commits fast.
 
 **AI as a pair, not the decision-maker.** Claude Code proposed options and wrote most of the code. I also used ChatGPT, Gemini, Perplexity and GitHub Copilot for ideas, a second opinion and test fixtures. In every case I chose between the options, reviewed every change and committed it myself.
+
+## 12. Continuous integration
+
+**Choice:** A GitHub Actions workflow runs on every pull request and every push to `main`, in two parallel jobs: lint, typecheck and unit tests in one; the Playwright test on Chromium in the other.
+
+**Why:** The pre-commit hook only catches lint errors, and only on machines where it's installed. CI runs every check on a clean machine, so a PR can't be merged without anyone noticing that a test broke. Two jobs instead of one: the fast checks report in about a minute without waiting for the browser test, and the result shows which kind of check failed.
+
+**Details:**
+- A new push to the same PR cancels the run that's still going, so only the latest code is tested.
+- The workflow can only read the repo (`permissions: contents: read`); it doesn't need more.
+- When the Playwright test fails, its HTML report is uploaded to the run for 7 days, so the failure can be inspected without re-running it locally.
