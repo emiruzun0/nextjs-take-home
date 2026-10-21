@@ -21,6 +21,15 @@ test("search a city, see scores, switch to the table and turn an activity off", 
   await expect(page.getByRole("row", { name: /^Soccer/ })).toBeVisible();
 });
 
+test("suggests cities while typing, so the right Paris can be picked", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("combobox", { name: "City" }).pressSequentially("Paris", { delay: 50 });
+  await page.getByRole("option", { name: "Paris, Texas, United States" }).click();
+
+  await expect(page).toHaveURL(/city=Paris&place=4717560/);
+  await expect(page.getByRole("heading", { name: "Paris, Texas, United States" })).toBeVisible();
+});
+
 test("explains when a city can't be found", async ({ page }) => {
   await page.goto("/?city=zzzqqq");
   await expect(page.getByText('We couldn\'t find "zzzqqq".')).toBeVisible();

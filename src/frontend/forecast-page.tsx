@@ -1,14 +1,14 @@
 import { ActivityCard } from "@/components/activity-card";
 import { RetryButton } from "@/components/retry-button";
 import { ScoreTable } from "@/components/score-table";
-import { SearchForm } from "@/components/search-form";
 import { StatusMessage } from "@/components/status-message";
 import { ToggleLinks } from "@/components/toggle-links";
 import { ACTIVITY_IDS } from "@/scoring/activities";
 import { getCityForecast } from "@/server/get-city-forecast";
 import { buildRows } from "./build-rows";
+import { CitySearch } from "./city-search";
 import { type Query, toggleActivity, toHref } from "./query";
-import { ACTIVITY_LABELS } from "./text";
+import { ACTIVITY_LABELS, placeLabel } from "./text";
 
 // Decides what to show for every state: no city yet, city not found,
 // service down, no activities picked, or the forecast itself.
@@ -23,7 +23,7 @@ export async function ForecastPage({ query }: { query: Query }) {
         </p>
       </header>
 
-      <SearchForm city={query.city} keep={keepParams(query)} />
+      <CitySearch query={query} />
 
       {query.city ? (
         <Forecast query={query} />
@@ -35,7 +35,7 @@ export async function ForecastPage({ query }: { query: Query }) {
 }
 
 async function Forecast({ query }: { query: Query }) {
-  const result = await getCityForecast(query.city);
+  const result = await getCityForecast(query.placeId !== null ? { id: query.placeId } : { name: query.city });
 
   if (!result.ok) {
     switch (result.error.code) {
@@ -57,13 +57,10 @@ async function Forecast({ query }: { query: Query }) {
 
   const { location, hours } = result.data;
   const { columns, rows } = buildRows(hours, query.activities);
-  // Skip the region when it repeats the city name ("Istanbul, Istanbul").
-  const region = location.region === location.name ? null : location.region;
-  const place = [location.name, region, location.country].filter(Boolean).join(", ");
 
   return (
     <>
-      <h2 className="text-xl font-semibold">{place}</h2>
+      <h2 className="text-xl font-semibold">{placeLabel(location)}</h2>
 
       <ToggleLinks
         label="Activities"
@@ -94,10 +91,4 @@ async function Forecast({ query }: { query: Query }) {
       )}
     </>
   );
-}
-
-// The search form only changes the city, so it carries the other settings along.
-function keepParams(query: Query): Record<string, string> {
-  const params = new URLSearchParams(toHref({ ...query, city: "" }).slice(2));
-  return Object.fromEntries(params);
 }

@@ -1,4 +1,6 @@
 export type Location = {
+  // Open-Meteo's ID for the place, so a specific "Paris" can be put in the URL.
+  id: number;
   name: string;
   region: string | null;
   country: string;

@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/emiruzun0/nextjs-take-home/actions/workflows/ci.yml/badge.svg)](https://github.com/emiruzun0/nextjs-take-home/actions/workflows/ci.yml)
 
-Search a city and see, hour by hour for the rest of today and tomorrow, how good the weather is for running, cycling, walking, a picnic, basketball and soccer. Each hour gets a score from 0 to 100 (100 is perfect) and a short reason, and each activity shows its best hour.
+Search a city (with suggestions as you type) and see, hour by hour for the rest of today and tomorrow, how good the weather is for running, cycling, walking, a picnic, basketball and soccer. Each hour gets a score from 0 to 100 (100 is perfect) and a short reason, and each activity shows its best hour.
 
 The same weather is good for one activity and bad for another: light rain ruins a picnic and makes a basketball court slippery, but a soccer game goes on. Comparing activities side by side is the point of the app.
 
@@ -61,8 +61,8 @@ src/frontend/forecast-page.tsx ── decides what to show for each result
 
 | Folder | Responsibility |
 |---|---|
-| `src/app/` | Routes only: the page, the loading skeleton and the error page |
-| `src/frontend/` | Page-level code: reads the URL, picks the state to show, maps codes to wording |
+| `src/app/` | Routes only: the page, the loading skeleton, the error page and `/api/cities` for search suggestions |
+| `src/frontend/` | Page-level code: reads the URL, picks the state to show, maps codes to wording, and the search box with suggestions |
 | `src/components/` | Reusable UI that only displays what it's given |
 | `src/server/` | Open-Meteo clients, marked `server-only` |
 | `src/scoring/` | The activity rules and the scoring function |
@@ -73,7 +73,8 @@ src/frontend/forecast-page.tsx ── decides what to show for each result
 
 Every decision, the options I considered and why I chose what I did is in [DECISIONS.md](DECISIONS.md). The short version:
 
-- **Server Components, no API route.** The server fetches the forecast and the page renders it. The backend only reports what happened (`{ ok: true, data }` or `{ ok: false, error: { code } }`), and the frontend decides how each case looks. I first chose a Route Handler with client-side fetching, then switched because it was more code for the same result.
+- **Server Components for the forecast.** The server fetches the forecast and the page renders it. The backend only reports what happened (`{ ok: true, data }` or `{ ok: false, error: { code } }`), and the frontend decides how each case looks. I first chose a Route Handler with client-side fetching, then switched because it was more code for the same result. The one API route, `/api/cities`, exists only for the suggestions while typing.
+- **Search suggestions, without breaking the plain form.** Typing shows up to 5 matching places, so "Paris" can mean Paris, Texas. A picked place goes in the URL by its ID (`?city=Paris&place=4717560`). Without JavaScript, or when Enter is pressed without picking, the form still searches by name.
 - **Everything is in the URL.** City, activities and layout, so any view can be shared and the back button works. The switches are plain links and the search is a GET form, so the page works without JavaScript.
 - **Scores are numbers, not colors or labels.** With color bands, 69 and 71 would look completely different even though they're almost the same.
 - **A 100 should be rare.** Darkness costs every activity something, sleep hours (11 PM–6 AM) cost extra, and wind gets more expensive the further over the limit it goes. The full rules are in decision 8.
@@ -84,7 +85,6 @@ Every decision, the options I considered and why I chose what I did is in [DECIS
 
 ## What I'd do with more time
 
-- **Choose between cities with the same name.** Search takes the top match, so "Paris" is always Paris, France.
 - **A fake Open-Meteo server for the Playwright test,** so it can't fail because the real API is down.
 - **Safety checks separate from comfort:** wind gusts and heat index, which Open-Meteo provides. Today only thunderstorms are treated as unsafe.
 - **Show more than one reason per hour.** Today the reason is only the factor that cost the most points.

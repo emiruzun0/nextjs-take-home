@@ -1,5 +1,6 @@
 import type { ActivityId } from "@/scoring/activities";
 import type { Reason } from "@/scoring/score";
+import type { Location } from "@/shared/weather";
 
 // All user-facing wording for codes coming from the backend and scoring lives here.
 
@@ -25,6 +26,13 @@ export const REASON_LABELS: Record<Reason, string> = {
 
 export function reasonLabel(reason: Reason | null): string {
   return reason === null ? "Great conditions" : REASON_LABELS[reason];
+}
+
+// "Paris, Texas, United States". Skips the region when it repeats the city
+// name ("Istanbul, Istanbul").
+export function placeLabel(location: Location): string {
+  const region = location.region === location.name ? null : location.region;
+  return [location.name, region, location.country].filter(Boolean).join(", ");
 }
 
 // "2026-10-21T18:00" → "6 PM". Times are already in the city's local time.
