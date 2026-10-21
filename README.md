@@ -17,7 +17,7 @@ npm install
 npm run dev
 ```
 
-Then open <http://localhost:3000/?city=Austin>.
+Then open <http://localhost:3000> and search for a city.
 
 **Environment variables:** none. Open-Meteo is free and doesn't need an API key, so there is no `.env.example`. If the app ever switches to a provider that needs a key, it would only be read in `src/server/`, which can't be bundled for the browser.
 
@@ -90,6 +90,7 @@ Every decision, the options I considered and why I chose what I did is in [DECIS
 - **Show more than one reason per hour.** Today the reason is only the factor that cost the most points.
 - **Tune the weights per activity with real feedback,** for example heat hurting running more than walking.
 - **"Use my location"** with browser geolocation.
+- **Deploy it** so there's a live link. The app needs a server (it renders and caches on the server), so GitHub Pages can't host it; Vercel would, and could deploy from the CI workflow only after the tests pass.
 - **Tests for the server code with a mocked `fetch`.** Today it's covered by the Playwright test and a manual check against the live API.
 
 ## AI usage
