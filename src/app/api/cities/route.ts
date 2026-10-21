@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server";
-import { suggestCities } from "@/server/get-city-forecast";
+import { suggestCities } from "@/server/suggest-cities";
 
 // Open-Meteo needs at least 2 characters to search.
 const MIN_LENGTH = 2;
