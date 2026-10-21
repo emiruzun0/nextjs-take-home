@@ -1,0 +1,29 @@
+e2e/forecast.spec.ts
+  s_997d97453d2b58::t_2cc2e94ca67a8a 33-45
+src/app/api/cities/route.ts
+  s_997d97453d2b58::t_ec533c8e4be886 2
+src/components/activity-card.tsx
+  s_997d97453d2b58::t_71e6ce430de73b 14,16
+src/frontend/forecast-page.tsx
+  s_997d97453d2b58::t_6d9199c0b2c064 26-28
+src/server/get-city-forecast.ts
+  s_997d97453d2b58::t_62b98c0e9334bb 5,7
+src/server/suggest-cities.ts
+  s_997d97453d2b58::t_6dcfe18af2caec 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e7553f00b98665ca6e79d8e748c1a25bc287c62c",
+  "prompts": {},
+  "sessions": {
+    "s_997d97453d2b58": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6e527a0-b715-4d36-ba15-5d20d6852e05",
+        "model": "unknown"
+      },
+      "human_author": "Emirhan Uzun <1emirhanuzun@gmail.com>"
+    }
+  }
+}
