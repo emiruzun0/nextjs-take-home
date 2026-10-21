@@ -11,9 +11,9 @@ export function ActivityCard({ row, hours }: Props) {
 
   return (
     <section aria-labelledby={`${row.id}-title`} className="rounded-lg border border-neutral-200 p-4">
-      <h2 id={`${row.id}-title`} className="text-lg font-semibold">
+      <h3 id={`${row.id}-title`} className="text-lg font-semibold">
         {row.label}
-      </h2>
+      </h3>
 
       {bestHour && bestCell && (
         <div className="mt-1">

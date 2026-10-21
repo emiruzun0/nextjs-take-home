@@ -2,9 +2,9 @@ import "server-only";
 import { unstable_rethrow } from "next/navigation";
 import { connection } from "next/server";
 import type { Result } from "@/shared/result";
-import type { CityForecast, HourlyWeather, Location } from "@/shared/weather";
+import type { CityForecast, HourlyWeather } from "@/shared/weather";
 import { fetchHourlyForecast } from "./forecast";
-import { findCity, findCityById, searchCities } from "./geocoding";
+import { findCity, findCityById } from "./geocoding";
 
 // A place is either picked from the suggestions (by ID) or typed by name.
 export type PlaceQuery = { id: number } | { name: string };
@@ -29,17 +29,6 @@ export async function getCityForecast(place: PlaceQuery): Promise<Result<CityFor
     // Next.js uses thrown errors for its own control flow; let those through.
     unstable_rethrow(error);
     console.error("Forecast request failed", error);
-    return { ok: false, error: { code: "UPSTREAM_FAILED" } };
-  }
-}
-
-// Up to 5 places matching what the user has typed so far, for the search box.
-export async function suggestCities(name: string): Promise<Result<Location[]>> {
-  try {
-    return { ok: true, data: await searchCities(name, 5) };
-  } catch (error) {
-    unstable_rethrow(error);
-    console.error("City search failed", error);
     return { ok: false, error: { code: "UPSTREAM_FAILED" } };
   }
 }

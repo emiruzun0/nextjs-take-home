@@ -23,7 +23,9 @@ export async function ForecastPage({ query }: { query: Query }) {
         </p>
       </header>
 
-      <CitySearch query={query} />
+      {/* Keyed by the place in the URL, so the box starts fresh on back/forward
+          instead of keeping what was typed before. */}
+      <CitySearch key={`${query.city}|${query.placeId}`} query={query} />
 
       {query.city ? (
         <Forecast query={query} />

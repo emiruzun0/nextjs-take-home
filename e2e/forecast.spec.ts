@@ -30,6 +30,19 @@ test("suggests cities while typing, so the right Paris can be picked", async ({ 
   await expect(page.getByRole("heading", { name: "Paris, Texas, United States" })).toBeVisible();
 });
 
+test("the search box follows the URL on back and forward", async ({ page }) => {
+  await page.goto("/?city=Austin");
+  const search = page.getByRole("combobox", { name: "City" });
+  await search.clear();
+  await search.pressSequentially("Paris", { delay: 50 });
+  await page.getByRole("option", { name: "Paris, Texas, United States" }).click();
+  await expect(page.getByRole("heading", { name: "Paris, Texas, United States" })).toBeVisible();
+
+  await page.goBack();
+  await expect(page.getByRole("heading", { name: "Austin, Texas, United States" })).toBeVisible();
+  await expect(page.getByRole("combobox", { name: "City" })).toHaveValue("Austin");
+});
+
 test("explains when a city can't be found", async ({ page }) => {
   await page.goto("/?city=zzzqqq");
   await expect(page.getByText('We couldn\'t find "zzzqqq".')).toBeVisible();
